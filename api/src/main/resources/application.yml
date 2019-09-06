@@ -1,0 +1,25 @@
+server:
+  servlet:
+    context-path: /api
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: utf-8
+    cache: false
+    servlet:
+      content-type: text/html
+
+info:
+  app:
+    name: @project.artifactId@
+    version: @project.version@
+    groupId: @project.groupId@
+    url: @project.url@
+
+
+
+logging:
+  config: classpath:logback.xml
+
+
