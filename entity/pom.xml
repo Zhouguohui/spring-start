@@ -7,29 +7,17 @@
         <groupId>com.spring.start</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.spring.start</groupId>
-    <artifactId>dao</artifactId>
+    <artifactId>entity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <dependencies>
         <dependency>
             <groupId>com.spring.start</groupId>
-            <artifactId>entity</artifactId>
+            <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>5.1.5.RELEASE</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.17</version>
-        </dependency>
-
     </dependencies>
 </project>
