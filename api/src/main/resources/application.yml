@@ -6,7 +6,7 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     encoding: utf-8
-    cache: false
+    cache:  false
     servlet:
       content-type: text/html
 

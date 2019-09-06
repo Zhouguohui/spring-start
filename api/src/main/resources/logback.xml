@@ -32,4 +32,8 @@
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
+
+    <logger name="com.spring.start.mapper" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
 </configuration>
