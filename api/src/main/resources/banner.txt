@@ -1,0 +1,8 @@
+我要开始启动了：
+Spring Boot Version: ${spring-boot.version}
+Spring Boot name: ${info.app.name}
+Spring Boot start Version: ${info.app.version}
+Spring Boot groupId:${info.app.groupId}
+Spring Boot url:${info.app.url}
+
+
