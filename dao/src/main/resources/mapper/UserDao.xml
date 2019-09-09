@@ -11,7 +11,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, user_name, mobile, password
+        id, user_name, mobile, password, del_flag
     </sql>
 
     <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -24,19 +24,17 @@
     <insert id="insert" parameterType="com.spring.start.entity.User" useGeneratedKeys="true" keyProperty="id">
         insert into user
         (
-        'id',
-        'user_name',
-        'mobile',
-        'password',
-        'del_flag'
+         user_name,
+         mobile,
+         password,
+         del_flag
         )
         values
         (
-        #{id},
-        #{userName},
-        #{mobile},
-        #{password}
-        #{delFlag}
+         #{userName},
+         #{mobile},
+         #{password},
+         #{delFlag}
         )
     </insert>
 

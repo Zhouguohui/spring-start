@@ -6,13 +6,13 @@ spring:
   devtools:
     restart:
       enabled:  false
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    encoding: utf-8
-    cache:  false
-    servlet:
-      content-type: text/html
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    encoding: utf-8
+#    cache:  false
+#    servlet:
+#      content-type: text/html
 
 info:
   app:
