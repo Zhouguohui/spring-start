@@ -76,7 +76,7 @@ public class ShiroConfig {
      * 认证和授权
      * @return
      */
-    @Bean
+    //@Bean
     public UserRealmOne userRealmOne(){
         UserRealmOne userRealmOne = new UserRealmOne();
         userRealmOne.setCredentialsMatcher(hashedCredentialsMatcherOne());
@@ -89,7 +89,7 @@ public class ShiroConfig {
      *
      * @return
      */
-    @Bean
+    //@Bean
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //securityManager.setRealm(shiroRealmOne());
@@ -107,7 +107,7 @@ public class ShiroConfig {
     }
 
 
-    @Bean
+    //@Bean
     public Authenticator authenticator(){
         //使用ModularRealmAuthenticator 来实现多realm的配置
         ModularRealmAuthenticator modularRealmAuthenticator = new ModularRealmAuthenticator();
@@ -130,7 +130,7 @@ public class ShiroConfig {
      * @param securityManager
      * @return
      */
-    @Bean
+   // @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         log.info("shiro 过滤器开始了");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -157,6 +157,7 @@ public class ShiroConfig {
         //注意此处使用的是LinkedHashMap，是有顺序的，shiro会按从上到下的顺序匹配验证，匹配了就不再继续验证
         //所以上面的url要苛刻，宽松的url要放在下面，尤其是"/**"要放到最下面，如果放前面的话其后的验证规则就没作用了。
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+        filterChainDefinitionMap.put("/*", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/users","roles[user]");
