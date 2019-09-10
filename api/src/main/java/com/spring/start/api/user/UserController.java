@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Created by 50935 on 2019/8/23.
@@ -24,6 +24,22 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+
+    @GetMapping(value = "/insertUser")
+    public DataReulst  insertUser(@Validated @NotEmpty String userName, String mobile, String password, Integer delFlag){
+        log.info("我要添加用户信息了");
+        User user = new User();
+        user.setMobile(mobile);
+        user.setPassword(password);
+        user.setUserName(userName);
+        user.setDelFlag(delFlag);
+        userService.insert(user);
+        log.info(user.getId()+"新添加用户ID");
+        return DataReulst.Success(user.getId());
+    }
+
+
     /**
      * 获取用户信息
      * @param id
@@ -41,15 +57,9 @@ public class UserController {
     }
 
 
-    @ResponseBody
-    @GetMapping(value = "/insertUser")
-    public DataReulst  insertUser(@Validated @NotNull String userName, String mobile, String password, Integer delFlag){
-       log.info("我要添加用户信息了");
-        User user = new User();
-        user.setMobile(mobile);
-        user.setPassword(password);
-        user.setUserName(userName);
-        user.setDelFlag(delFlag);
+    @RequestMapping(value = "/insert")
+    public DataReulst  insert(@Validated User user){
+        log.info("我要添加用户信息了");
         userService.insert(user);
         log.info(user.getId()+"新添加用户ID");
         return DataReulst.Success(user.getId());

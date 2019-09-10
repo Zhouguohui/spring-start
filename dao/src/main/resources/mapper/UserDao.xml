@@ -41,10 +41,10 @@
     <update id="update" parameterType="com.spring.start.entity.User">
         update user
         <set>
-            <if test="userName != null ">'user_name' = #{userName},</if>
-            <if test="mobile != null ">'mobile' = #{mobile},</if>
-            <if test="password != null ">'password' = #{password},</if>
-            <if test="delFlag != null ">'del_flag' = #{delFlag},</if>
+            <if test="userName != null ">user_name = #{userName},</if>
+            <if test="mobile != null ">mobile = #{mobile},</if>
+            <if test="password != null ">password = #{password},</if>
+            <if test="delFlag != null ">del_flag = #{delFlag}</if>
         </set>
         where id = #{id}
     </update>

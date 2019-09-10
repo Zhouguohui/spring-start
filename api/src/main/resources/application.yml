@@ -6,6 +6,7 @@ spring:
   devtools:
     restart:
       enabled:  false
+  database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
 #  thymeleaf:
 #    prefix: classpath:/templates/
 #    suffix: .html
@@ -43,13 +44,13 @@ sharding:
       test1: # 配置第一个从库
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/test_0?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
+        url: jdbc:mysql://localhost:3306/test_1?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
       test2: # 配置第二个从库
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/test_0?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
+        url: jdbc:mysql://localhost:3306/test_2?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
     config:
