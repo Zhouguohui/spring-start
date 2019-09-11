@@ -5,7 +5,6 @@ import com.spring.start.mapper.UserDao;
 import com.spring.start.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by 50935 on 2019/9/9.
@@ -26,7 +25,6 @@ public class UserServiceImpl implements UserService {
        userDao.update(user);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public void insert(User user) {
         userDao.insert(user);

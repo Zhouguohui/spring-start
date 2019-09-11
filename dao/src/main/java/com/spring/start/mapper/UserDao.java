@@ -1,12 +1,12 @@
 package com.spring.start.mapper;
 
 import com.spring.start.entity.User;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by 50935 on 2019/9/9.
  */
-@Mapper
+@Repository
 public interface UserDao {
 
     User getById(Long id);
