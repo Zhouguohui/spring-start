@@ -1,4 +1,4 @@
-package com.spring.start.config;
+package com.spring.start.config.zookeeper;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

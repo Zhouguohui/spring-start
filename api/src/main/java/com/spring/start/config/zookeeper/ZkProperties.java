@@ -1,4 +1,4 @@
-package com.spring.start.config;
+package com.spring.start.config.zookeeper;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
