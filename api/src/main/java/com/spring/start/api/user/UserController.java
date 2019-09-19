@@ -3,6 +3,7 @@ package com.spring.start.api.user;
 import com.spring.start.entity.User;
 import com.spring.start.result.DataReulst;
 import com.spring.start.service.UserService;
+import com.spring.start.zookeeper.ZkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ZkUtils zkUtils;
 
 
     @GetMapping(value = "/insertUser")

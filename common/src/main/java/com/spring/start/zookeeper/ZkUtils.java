@@ -26,6 +26,12 @@ public class ZkUtils {
     @Autowired
     private CuratorFramework client;
 
+    /**
+     * zk关闭
+     */
+    public void close(){
+        client.close();
+    }
 
     /**
      * 校验节点是否存在
@@ -106,7 +112,22 @@ public class ZkUtils {
     }
 
     /**
-     * 创建节点
+     * 修改节点
+     * @param path
+     * @param data
+     * @param version
+     * @return
+     */
+    public Stat setData(String path, String data,int version) throws Exception {
+        Stat stat =  client.setData()
+                .withVersion(version)
+                .forPath(path,data.getBytes());
+        return stat;
+    }
+
+
+    /**
+     * 创建修改节点
      * @param path  节点路径
      * @param data  节点数据  如果只创建节点该字段为null
      * @param createMode  节点类型  如果使用默认类型 该字段为null
@@ -117,7 +138,7 @@ public class ZkUtils {
      * @return
      * @throws Exception
      */
-    public Stat setData(String path, String data, CreateMode createMode, List<ACL> acl,boolean isNeeded,int version,boolean iscreate) throws Exception {
+    public Stat setCreateData(String path, String data, CreateMode createMode, List<ACL> acl,boolean isNeeded,int version,boolean iscreate) throws Exception {
 
         if(iscreate && !existsState(path)){
            return  creatData(path,data,createMode,acl,isNeeded);
