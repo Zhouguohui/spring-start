@@ -1,17 +1,15 @@
 package com.spring.start.zookeeper;
 
+import com.spring.start.spring.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.CreateBuilder;
 import org.apache.curator.framework.api.DeleteBuilder;
 import org.apache.curator.framework.recipes.cache.*;
-import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,16 +18,14 @@ import java.util.Objects;
  * Created by 50935 on 2019/9/18.
  */
 @Slf4j
-@Component
 public class ZkUtils {
 
-    @Autowired
-    private CuratorFramework client;
+    private static CuratorFramework client = SpringUtils.getBean("curatorFramework");
 
     /**
      * zk关闭
      */
-    public void close(){
+    public static void close(){
         client.close();
     }
 
@@ -39,7 +35,7 @@ public class ZkUtils {
      * @return
      * @throws Exception
      */
-    public boolean existsState (String path) throws Exception {
+    public static boolean existsState (String path) throws Exception {
         Stat stat= getData(path);
         if(Objects.isNull(stat)){
             return false;
@@ -54,7 +50,7 @@ public class ZkUtils {
      * @return
      * @throws Exception
      */
-    public Stat getData(String path) throws Exception {
+    public static Stat getData(String path) throws Exception {
         Stat stat = new Stat();
         client.getData().storingStatIn(stat).forPath(path);
         return stat;
@@ -67,7 +63,7 @@ public class ZkUtils {
      * @param isNeeded  是否递归删除
      * @throws Exception
      */
-    public void deleteData(String path,int version,boolean isNeeded) throws Exception {
+    public static void deleteData(String path,int version,boolean isNeeded) throws Exception {
         DeleteBuilder deleteBuilder = client.delete();
             deleteBuilder
                     .guaranteed()
@@ -88,7 +84,7 @@ public class ZkUtils {
      * @return
      * @throws Exception
      */
-    public Stat creatData(String path, String data, CreateMode createMode, List<ACL> acl,boolean isNeeded) throws Exception {
+    public static Stat creatData(String path, String data, CreateMode createMode, List<ACL> acl,boolean isNeeded) throws Exception {
         Stat stat = new Stat();
         CreateBuilder createBuilder = client.create();
                 createBuilder.storingStatIn(stat);
@@ -118,7 +114,7 @@ public class ZkUtils {
      * @param version
      * @return
      */
-    public Stat setData(String path, String data,int version) throws Exception {
+    public static Stat setData(String path, String data,int version) throws Exception {
         Stat stat =  client.setData()
                 .withVersion(version)
                 .forPath(path,data.getBytes());
@@ -199,17 +195,6 @@ public class ZkUtils {
         childrenCache.getListenable().addListener(listener);
         childrenCache.start(PathChildrenCache.StartMode.BUILD_INITIAL_CACHE);
     }
-
-    /**
-     * 分布式锁
-     * @param path
-     */
-    public void  interProcessMutex(String path){
-        InterProcessMutex lock = new InterProcessMutex(client, path);
-
-    }
-
-
 
 
 }

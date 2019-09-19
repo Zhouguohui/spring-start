@@ -3,7 +3,8 @@ package com.spring.start.api.user;
 import com.spring.start.entity.User;
 import com.spring.start.result.DataReulst;
 import com.spring.start.service.UserService;
-import com.spring.start.zookeeper.ZkUtils;
+import com.spring.start.zookeeper.zklock.enums.LockPath;
+import com.spring.start.zookeeper.zklock.impl.SharedLock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by 50935 on 2019/8/23.
@@ -25,9 +27,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ZkUtils zkUtils;
 
 
     @GetMapping(value = "/insertUser")
@@ -55,9 +54,26 @@ public class UserController {
                               @NotBlank
                               @Min(value=0,message = "用户Id必须大于0")
                               @Max(value=1000,message = "用户Id无效")
-                              @PathVariable(value="id") Long id) {
-        User user  = userService.getById(id);
-        return DataReulst.Success(user);
+                              @PathVariable(value="id") Long id) throws Exception {
+
+        SharedLock sharedLock =  new SharedLock();
+        try {
+           boolean b =  sharedLock.acquire(LockPath.test,5000, TimeUnit.MILLISECONDS);
+           log.info("我获取锁的状态是==="+b);
+           if(b){
+                return DataReulst.Success(1);
+           }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                log.info("我解锁了");
+                sharedLock.release(LockPath.test);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return DataReulst.Success(0);
     }
 
 
