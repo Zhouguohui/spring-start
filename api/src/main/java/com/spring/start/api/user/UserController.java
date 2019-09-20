@@ -59,15 +59,14 @@ public class UserController {
         SharedLock sharedLock =  new SharedLock();
         try {
            boolean b =  sharedLock.acquire(LockPath.test,5000, TimeUnit.MILLISECONDS);
-           log.info("我获取锁的状态是==="+b);
            if(b){
-                return DataReulst.Success(1);
+              User user =  userService.getById(id);
+              return DataReulst.Success(user);
            }
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
             try {
-                log.info("我解锁了");
                 sharedLock.release(LockPath.test);
             } catch (Exception e) {
                 e.printStackTrace();

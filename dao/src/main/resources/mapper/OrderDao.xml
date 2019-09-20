@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.start.mapper.OrderDao">
+
+    <resultMap id="BaseResultMap" type="com.spring.start.entity.Order" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="order_id" property="orderId" jdbcType="INTEGER" />
+        <result column="order_name" property="orderName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, order_id, order_name
+    </sql>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from order
+        where id=#{id}
+    </select>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from order
+    </select>
+
+    <insert id="insert" parameterType="com.spring.start.entity.Order" useGeneratedKeys="true" keyProperty="id">
+        insert into order (order_id,order_name) values (#{orderId},#{orderName})
+    </insert>
+
+
+</mapper>
