@@ -77,11 +77,16 @@ public class UserController {
 
 
     @RequestMapping(value = "/insert")
-    public DataReulst  insert(@Validated User user){
-        log.info("我要添加用户信息了");
-        userService.insert(user);
-        log.info(user.getId()+"新添加用户ID");
-        return DataReulst.Success(user.getId());
+    public DataReulst  insert(/*@Validated User user*/){
+        for(int i=0;i<10;i++){
+            User user = new User();
+            user.setDelFlag(0);
+            user.setUserName("哈哈"+i);
+            user.setPassword("password"+i);
+            user.setMobile("mobile"+i);
+            userService.insert(user);
+        }
+        return DataReulst.Success(1);
     }
 
 }
