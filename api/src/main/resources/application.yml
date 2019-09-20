@@ -73,7 +73,7 @@ sharding:
       masterslave:
         load-balance-algorithm-type: round_robin
       sharding:
-        defaultDataSourceName: test0
+        #defaultDataSourceName: test0
         master-slave-rules:
           ds0:
             master-data-source-name: test0
