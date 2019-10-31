@@ -3,6 +3,9 @@ server:
     context-path: /api
 
 spring:
+#  cache:
+#    ehcache:
+#      config: classpath:ehcache.xml
   devtools:
     restart:
       enabled:  false

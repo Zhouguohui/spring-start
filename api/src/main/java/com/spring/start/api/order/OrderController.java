@@ -1,5 +1,6 @@
 package com.spring.start.api.order;
 
+import com.spring.start.cache.impl.TopUP;
 import com.spring.start.entity.Order;
 import com.spring.start.result.DataReulst;
 import com.spring.start.service.OrderService;
@@ -34,6 +35,7 @@ public class OrderController {
 
     @GetMapping(value = "/getAll")
     public DataReulst getAll(){
+        System.out.println(TopUP.upConfig("9527100010001"));
        List<Order> list =  orderService.getAll();
        return DataReulst.Success(list);
     }
