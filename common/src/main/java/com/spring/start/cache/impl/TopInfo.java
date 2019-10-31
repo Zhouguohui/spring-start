@@ -15,15 +15,15 @@ import java.util.Properties;
  */
 @Slf4j
 @Component
-public class TopConfig extends RootEhcache<String, String> implements ApplicationRunner {
+public class TopInfo extends RootEhcache<String, String> implements ApplicationRunner {
 
     @Synchronized
     @Override
     public void refresh() throws Exception{
-        log.info("加载TopConfig资源配置文件-------开始");
-        Properties properties = PropertiesLoaderUtils.loadAllProperties("config/config.properties");
+        log.info("加载TopInfo资源配置文件-------开始");
+        Properties properties = PropertiesLoaderUtils.loadAllProperties("config/info.properties");
         properties.entrySet().stream().forEach(s->this.inElement(String.valueOf(s.getKey()),String.valueOf(s.getValue())));
-        log.info("加载TopConfig资源配置文件-------结束");
+        log.info("加载TopInfo资源配置文件-------结束");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class TopConfig extends RootEhcache<String, String> implements Applicatio
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        log.info("*****项目启动刷新TopConfig的ehcache*****");
+        log.info("*****项目启动刷新TopInfo的ehcache*****");
         refresh();
     }
 }

@@ -27,8 +27,8 @@
             timeToLiveSeconds="0"
             overflowToDisk="false"/>
 
-    <cache name="topConfig"
-           maxEntriesLocalHeap="1000"
+    <cache name="topInit"
+           maxEntriesLocalHeap="2000"
            eternal="true"
            timeToIdleSeconds="0"
            timeToLiveSeconds="0"

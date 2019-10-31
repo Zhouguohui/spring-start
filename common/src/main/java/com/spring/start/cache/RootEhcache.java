@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Component
 public abstract class RootEhcache<K,V> implements IBaseCache {
-
     @Autowired
     private CacheManager cacheManager;
 
@@ -22,7 +21,7 @@ public abstract class RootEhcache<K,V> implements IBaseCache {
 
     @PostConstruct
     private void init() {
-        cache = cacheManager.getCache("topConfig");
+        cache = cacheManager.getCache("topInit");
     }
 
     /**
@@ -31,7 +30,8 @@ public abstract class RootEhcache<K,V> implements IBaseCache {
      * @param k
      * @param v
      */
-    public void inElement(K k, V v) {
+    public void inElement(K k, V v)
+    {
         cache.put(new Element(k, v));
     }
 

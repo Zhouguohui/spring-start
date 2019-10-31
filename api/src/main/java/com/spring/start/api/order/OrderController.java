@@ -36,6 +36,7 @@ public class OrderController {
     @GetMapping(value = "/getAll")
     public DataReulst getAll(){
         System.out.println(TopUP.upConfig("9527100010001"));
+        System.out.println(TopUP.upInfo("2000100010001"));
        List<Order> list =  orderService.getAll();
        return DataReulst.Success(list);
     }
