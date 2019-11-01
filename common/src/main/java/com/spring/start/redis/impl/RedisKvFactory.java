@@ -29,7 +29,6 @@ public class RedisKvFactory implements RedisKvCall {
 
     @Override
     public Long hset(String key, String field, String value) {
-
         return jedisCluster.hset(baseKey + key, field, value);
     }
 
