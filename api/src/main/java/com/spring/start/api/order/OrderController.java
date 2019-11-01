@@ -39,6 +39,8 @@ public class OrderController {
     public DataReulst getAll(){
         RedisUp.upFactory(RedisTypeEnum.test).set("123","456");
         System.out.println(RedisUp.upFactory(RedisTypeEnum.test).get("123"));
+        RedisUp.upFactory(RedisTypeEnum.test).del("123");
+        System.out.println(RedisUp.upFactory(RedisTypeEnum.test).get("123"));
         System.out.println(TopUP.upConfig("9527100010001"));
         System.out.println(TopUP.upInfo("2000100010001"));
        List<Order> list =  orderService.getAll();

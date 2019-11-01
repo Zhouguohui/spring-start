@@ -11,6 +11,15 @@ public class RedisKvFactory implements RedisKvCall {
 
     private static final JedisCluster jedisCluster = SpringUtils.getBean(JedisCluster.class);
 
+    private static final String COMPARE_AND_DELETE =
+            "if redis.call('get',KEYS[1]) == ARGV[1]\n" +
+                    "then\n" +
+                    "    return redis.call('del',KEYS[1])\n" +
+                    "else\n" +
+                    "    return 0\n" +
+                    "end";
+
+
     private String baseKey = "";
 
     public RedisKvFactory(String sKey) {
@@ -54,9 +63,9 @@ public class RedisKvFactory implements RedisKvCall {
 
     @Override
     public Long setnx(String key, String value) {
-
         return jedisCluster.setnx(baseKey + key, value);
     }
+
 
     @Override
     public Long del(String key) {
