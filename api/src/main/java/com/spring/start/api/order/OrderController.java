@@ -2,6 +2,8 @@ package com.spring.start.api.order;
 
 import com.spring.start.cache.impl.TopUP;
 import com.spring.start.entity.Order;
+import com.spring.start.enums.RedisTypeEnum;
+import com.spring.start.redis.impl.RedisUp;
 import com.spring.start.result.DataReulst;
 import com.spring.start.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ public class OrderController {
 
     @GetMapping(value = "/getAll")
     public DataReulst getAll(){
+        RedisUp.upFactory(RedisTypeEnum.test).set("123","456");
+        System.out.println(RedisUp.upFactory(RedisTypeEnum.test).get("123"));
         System.out.println(TopUP.upConfig("9527100010001"));
         System.out.println(TopUP.upInfo("2000100010001"));
        List<Order> list =  orderService.getAll();
