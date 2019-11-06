@@ -6,6 +6,7 @@ import com.spring.start.enums.RedisTypeEnum;
 import com.spring.start.redis.impl.RedisUp;
 import com.spring.start.result.DataReulst;
 import com.spring.start.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * Created by 50935 on 2019/9/19.
  */
+@Slf4j
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -37,12 +39,6 @@ public class OrderController {
 
     @GetMapping(value = "/getAll")
     public DataReulst getAll(){
-        RedisUp.upFactory(RedisTypeEnum.test).set("123","456");
-        System.out.println(RedisUp.upFactory(RedisTypeEnum.test).get("123"));
-        RedisUp.upFactory(RedisTypeEnum.test).del("123");
-        System.out.println(RedisUp.upFactory(RedisTypeEnum.test).get("123"));
-        System.out.println(TopUP.upConfig("9527100010001"));
-        System.out.println(TopUP.upInfo("2000100010001"));
        List<Order> list =  orderService.getAll();
        return DataReulst.Success(list);
     }
@@ -51,5 +47,15 @@ public class OrderController {
     public DataReulst getById(long id){
         Order order =  orderService.getById(id);
         return DataReulst.Success(order);
+    }
+
+
+    public void Test(){
+        RedisUp.upFactory(RedisTypeEnum.test).set("123","456");
+        log.info(RedisUp.upFactory(RedisTypeEnum.test).get("123"));
+        RedisUp.upFactory(RedisTypeEnum.test).del("123");
+        log.info(RedisUp.upFactory(RedisTypeEnum.test).get("123"));
+        log.info(TopUP.upConfig("9527100010001"));
+        log.info(TopUP.upInfo("2000100010001"));
     }
 }
