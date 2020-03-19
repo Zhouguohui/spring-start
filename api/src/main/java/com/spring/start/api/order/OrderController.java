@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Created by 50935 on 2019/9/19.
- */
 @Slf4j
 @RestController
 @RequestMapping("/order")
